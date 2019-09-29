@@ -1,13 +1,15 @@
 # Dome9 SDK
 
 
+[![Documentation Status](https://readthedocs.org/projects/dome9/badge/?version=latest)](http://dome9.readthedocs.io/?badge=latest)
+
 
 ## Usage
 
 ```python
-from dome9sdk import Dome9SDK
+from dome9 import Dome9
 
-dome9 = Dome9SDK(key='xxxxxx', secret='yyyyyyy')
+dome9 = Dome9(key='xxxxxx', secret='yyyyyyy')
 
 rulesets = dome9.list_rulesets()
 ```
@@ -33,23 +35,23 @@ echo -e "import dome9sdk \nprint(dome9sdk.Dome9SDK().list_cloud_accounts())" | p
 
 ```python
 import json
-from dome9sdk import Dome9SDK
+from dome9 import Dome9
 
 cloudAccount = '00000-00000-00000-00000'
 
-dome9 = Dome9SDK()
+d9 = Dome9()
 
 rulesetTemplate = {}
 with open('ruleset','r') as f:
     rulesetTemplate = json.loads(f.read())
 
 # Step 1. Create ruleset
-ruleset = dome9.create_ruleset(rulesetTemplate)
+ruleset = d9.create_ruleset(rulesetTemplate)
 
 # Step 2. Run Assessment
-results = dome9.run_assessment(rulesetId=ruleset['id'], cloudAccountId=cloudAccount)
+results = d9.run_assessment(rulesetId=ruleset['id'], cloudAccountId=cloudAccount)
 
 # Step 3. Delete ruleset
-ruleset = dome9.delete_ruleset(ruleset['id'])
+ruleset = d9.delete_ruleset(ruleset['id'])
 
 ```
