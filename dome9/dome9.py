@@ -15,6 +15,7 @@ class Dome9(object):
         self._load_credentials(key, secret)
 
     # ------ System Methods ------ 
+    # ----------------------------
 
     def _load_credentials(self, key, secret):
         if key and secret:
@@ -28,19 +29,19 @@ class Dome9(object):
 
     def _request(self, method, route, payload=None):
         res = url = err = jsonObject = None
-        payload = json.dumps(payload)
+        _payload = json.dumps(payload)
         try:
             url = '{}{}'.format(self.endpoint, route)
             if method == 'get':
-                res = requests.get(url=url, params=payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.get(url=url, params=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'post':
-                res = requests.post(url=url, data=payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.post(url=url, data=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'patch':
-                res = requests.patch(url=url, json=payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.patch(url=url, json=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'put':
-                res = requests.put(url=url, data=payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.put(url=url, data=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'delete':
-                res = requests.delete(url=url, params=payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.delete(url=url, params=_payload, headers=self.headers, auth=(self.key, self.secret))
                 return bool(res.status_code == 204)
 
         except requests.ConnectionError as ex:
@@ -76,6 +77,7 @@ class Dome9(object):
 
 
     # ------ Accounts -------
+    # -----------------------
 
     def get_cloud_account(self, id):
         """Get a Cloud Account
@@ -152,6 +154,7 @@ class Dome9(object):
 
 
     # ------ Rulesets -------
+    # -----------------------
 
     def list_rulesets(self):
         """List Compliance Rulesets
@@ -223,6 +226,7 @@ class Dome9(object):
 
 
     # ------ Remediations -------
+    # ---------------------------
 
     def list_remediations(self):
         """List Remediations
@@ -276,6 +280,7 @@ class Dome9(object):
 
 
     # ------ Exclusions -------
+    # -----------------------
 
     def list_exclusions(self):
         """List all exclusions
@@ -301,6 +306,7 @@ class Dome9(object):
 
 
     # ------ Assessment -------
+    # -------------------------
 
     def run_assessment(self, rulesetId, cloudAccountId, region=None):
         """Run compliance assessments on Cloud Accounts, and get the results
