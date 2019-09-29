@@ -2,7 +2,7 @@
 
 
 [![Documentation Status](https://readthedocs.org/projects/dome9/badge/?version=latest)](http://dome9.readthedocs.io/?badge=latest)
-
+![PyPI](https://img.shields.io/pypi/v/dome9)
 
 ## Usage
 
