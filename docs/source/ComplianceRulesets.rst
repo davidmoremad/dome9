@@ -10,6 +10,15 @@ get_ruleset
 
 -----
 
+list_rulesets
+------------------------
+.. automodule:: dome9.dome9.Dome9
+   :noindex:
+   :members:  list_rulesets
+  
+
+-----
+
 create_ruleset
 ------------------------
 .. automodule:: dome9.dome9.Dome9
