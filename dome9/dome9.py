@@ -47,7 +47,8 @@ class Dome9(object):
         except requests.ConnectionError as ex:
             raise ConnectionError(url, ex.message)
 
-        if res.status_code in range(200, 299):
+        # If status_code is in range 200-209
+        if str(res.status_code)[0] == '2':
             try:
                 if res.content:
                     jsonObject = res.json()
@@ -330,10 +331,9 @@ class Dome9(object):
         """
         bundle = {
 			'id': rulesetId,
-			'cloudAccountId': cloudAccountId,
-			'requestId': str(uuid.uuid4())
+			'CloudAccountId': cloudAccountId
 		}
         if region:
             bundle['region'] = region
-        results = self._post(route='assessment/bundleV2', payload=json.dumps(bundle))
+        results = self._post(route='assessment/bundleV2', payload=bundle)
         return results
