@@ -11,9 +11,9 @@ Welcome to Dome9's documentation!
   :maxdepth: 2
   :caption: Contents:
 
-  ComplianceAccounts.rst
-  ComplianceRulesets.rst
-  ComplianceRemediations.rst
+  Accounts.rst
+  Rulesets.rst
+  Remediations.rst
   Exclusions.rst
   Assessments.rst
  
