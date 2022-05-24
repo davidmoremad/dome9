@@ -166,6 +166,33 @@ class Dome9(object):
         account['credentials']['arn'] = roleArn
         return self._post(route='CloudAccounts', payload=account)
 
+    # ------------------- Assets -------------------
+    # ----------------------------------------------
+
+    def list_protected_assets(self, pagesize=1000):
+        """List all Cloud Assets
+
+        Returns:
+            dict: Pagination of protected assets.
+
+        Response object:
+            .. literalinclude:: schemas/ProtectedAsset.json
+        """
+        results = {}
+        pagination = {'pageSize': pagesize}
+        rsp = self._post(route='protected-asset/search', payload=pagination)
+        results = rsp
+        
+        while rsp['searchAfter']:
+            print(len(results['assets']))
+            pagination['searchAfter'] = rsp['searchAfter']
+            rsp = self._post(route='protected-asset/search', payload=pagination)
+            results['assets'].extend(rsp['assets'])
+        
+        return results
+
+
+
     # ------------------ Rulesets ------------------
     # ----------------------------------------------
 

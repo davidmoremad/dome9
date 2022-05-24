@@ -1,0 +1,136 @@
+{
+    "searchRequest": {
+        "pageSize": 10,
+        "sorting": {
+            "fieldName": null,
+            "direction": 0
+        },
+        "filter": {
+            "freeTextPhrase": null,
+            "fields": [],
+            "tags": [],
+            "includedEntityTypes": null,
+            "excludedEntityTypes": null
+        },
+        "searchAfter": [],
+        "additionalFields": {
+            "source": null,
+            "filterFields": [],
+            "sortField": {
+                "fieldName": null,
+                "direction": 1
+            }
+        }
+    },
+    "assets": [
+        {
+            "id": "1|ffffaaaa-ffff-ffff-aaaa-123412341234|rg|5|internetGateway|igw-12341234-112345",
+            "entityId": "igw-12341234",
+            "externalCloudAccountId": "1234567890",
+            "cloudAccountId": "ffffaaaa-ffff-ffff-aaaa-123412341234",
+            "srl": "1|ffffaaaa-ffff-ffff-aaaa-123412341234|rg|5|internetGateway|igw-12341234",
+            "type": "InternetGateway",
+            "name": "",
+            "tags": [],
+            "platform": "aws",
+            "typeByPlatform": "aws|InternetGateway",
+            "network": "vpc-12341234",
+            "region": "us_west_2",
+            "resourceGroup": "",
+            "additionalFields": [
+                {
+                    "name": "IsBillable",
+                    "value": "False"
+                }
+            ],
+            "externalAdditionalFields": null
+        }
+    ],
+    "totalCount": 102868,
+    "aggregations": {
+        "resourceGroup": [
+            {
+                "value": "myrg",
+                "count": 96217
+            }
+        ],
+        "cloudAccountId": [
+            {
+                "value": "12341234-1234-1234-1234-123412341234",
+                "count": 7926
+            }
+        ],
+        "type": [
+            {
+                "value": "azure|User",
+                "count": 18
+            },
+            {
+                "value": "azure|Bastion",
+                "count": 16
+            },
+            {
+                "value": "azure|VirtualNetworkGateway",
+                "count": 16
+            },
+            {
+                "value": "google|InstanceTemplate",
+                "count": 16
+            }
+        ],
+        "region": [
+            {
+                "value": "",
+                "count": 54560
+            },
+            {
+                "value": "us_east_1",
+                "count": 8070
+            },
+            {
+                "value": "eu_west_1",
+                "count": 3985
+            }
+        ],
+        "platform": [
+            {
+                "value": "aws",
+                "count": 45584
+            },
+            {
+                "value": "google",
+                "count": 24263
+            },
+            {
+                "value": "azure",
+                "count": 20928
+            },
+            {
+                "value": "kubernetes",
+                "count": 12093
+            }
+        ],
+        "network": [
+            {
+                "value": "",
+                "count": 96480
+            },
+            {
+                "value": "injectors-network",
+                "count": 291
+            },
+            {
+                "value": "vpc-12341234",
+                "count": 183
+            }
+        ]
+    },
+    "searchAfter": [
+        "ffffaaaa-ffff-ffff-aaaa-123412341234",
+        "",
+        "us_west_1",
+        "vpc-12341234",
+        "InternetGateway",
+        "1|ffffaaaa-ffff-ffff-aaaa-123412341234|rg|1|internetGateway|igw-12341234-123123"
+    ]
+}
