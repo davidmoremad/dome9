@@ -18,7 +18,7 @@ limitations under the License.
 from setuptools import setup, find_packages
 
 def read_file(filename):
-    with open(filename) as f:
+    with open(filename, encoding="utf-8") as f:
         return f.read()
 
 setup(
