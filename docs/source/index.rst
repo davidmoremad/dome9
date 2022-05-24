@@ -12,6 +12,7 @@ Welcome to Dome9's documentation!
   :caption: Contents:
 
   Accounts.rst
+  Assets.rst
   Rulesets.rst
   Remediations.rst
   Exclusions.rst
