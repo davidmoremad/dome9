@@ -46,5 +46,3 @@ python -c "from dome9 import Dome9; print(Dome9().list_rulesets())"
 * 🚀 Run assessment -> `dome9.run_assessment()`
 * 💖 List all your cloud assets -> `dome9.list_protected_assets()`
 
-## What else?
-
