@@ -17,6 +17,8 @@ This repository contains a Python SDK of this tool. Initially its SDK did not ha
 pip install dome9  # Install last stable version
 ```
 
+**SDK Documentation**: https://dome9.readthedocs.io/
+
 ## Usage
 
 There are two ways to authenticate:

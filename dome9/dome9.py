@@ -169,8 +169,14 @@ class Dome9(object):
     # ------------------- Assets -------------------
     # ----------------------------------------------
 
-    def list_protected_assets(self, pagesize=1000):
+    def list_protected_assets(self, textSearch="", filters=[], pagesize=1000):
         """List all Cloud Assets
+
+        Args:
+            textSearch (list): Filter query by using text string. (i.e.: prod-uk)
+            filters (list): List of filters. (i.e.: `[{name: "platform", value: "google"},{name: "cloudAccountId", value: "0123456789"}]`)
+                List of filter names: organizationalUnitId, platform, type, cloudAccountId, region, network, resourceGroup. 
+            pagesize (int): Items per query
 
         Returns:
             dict: Pagination of protected assets.
@@ -179,12 +185,13 @@ class Dome9(object):
             .. literalinclude:: schemas/ProtectedAsset.json
         """
         results = {}
-        pagination = {'pageSize': pagesize}
+        pagination = {"pageSize": pagesize, "filter": {"fields": filters, 'freeTextPhrase': textSearch}}
         rsp = self._post(route='protected-asset/search', payload=pagination)
         results = rsp
 
+        self.list_protected_assets()
+
         while rsp['searchAfter']:
-            print(len(results['assets']))
             pagination['searchAfter'] = rsp['searchAfter']
             rsp = self._post(route='protected-asset/search', payload=pagination)
             results['assets'].extend(rsp['assets'])
