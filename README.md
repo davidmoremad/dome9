@@ -1,7 +1,11 @@
 # Dome9 (Python SDK)
 
 [![Documentation Status](https://readthedocs.org/projects/dome9/badge/?version=latest&style=flat-square)](http://dome9.readthedocs.io/?badge=latest)
-![PyPI](https://img.shields.io/pypi/v/dome9?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/davidmoremad/dome9/Build?style=flat-square)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dome9?color=green&label=python%20version&style=flat-square)
+![PyPI](https://img.shields.io/pypi/v/dome9?label=pypi%20package&style=flat-square)
+![GitHub License](https://img.shields.io/github/license/davidmoremad/dome9?style=flat-square)
+
 
 Dome9 is a web service that allows you to improve the security of your cloud technologies (AWS, Azure, GCP, Kubernetes, etc...). Through its service you can centralize all the information and perform security controls (GDPR, HIPAA, ISO27001...) individually or globally.
 
