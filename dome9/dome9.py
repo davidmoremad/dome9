@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 import json
-import uuid
 import requests
-from requests import ConnectionError, auth
+from requests import ConnectionError
+
 
 class Dome9(object):
 
@@ -14,7 +14,7 @@ class Dome9(object):
         self.endpoint = endpoint + '/{}/'.format(apiVersion)
         self._load_credentials(key, secret)
 
-    # ------ System Methods ------ 
+    # ------ System Methods ------
     # ----------------------------
 
     def _load_credentials(self, key, secret):
@@ -76,16 +76,15 @@ class Dome9(object):
     def _delete(self, route, payload=None):
         return self._request('delete', route, payload)
 
-
     # ------------------   Accounts   ------------------
     # --------------------------------------------------
 
     def get_cloud_account(self, id):
         """Get a Cloud Account
-        
+
         Args:
             id (str): ID of the Cloud Account
-        
+
         Returns:
             dict: Cloud Account object.
 
@@ -96,7 +95,7 @@ class Dome9(object):
 
     def list_aws_accounts(self):
         """List AWS accounts
-        
+
         Returns:
             list: List of AWS Cloud Accounts.
 
@@ -107,7 +106,7 @@ class Dome9(object):
 
     def list_azure_accounts(self):
         """List Azure accounts
-        
+
         Returns:
             list: List of Azure Cloud Accounts.
 
@@ -118,7 +117,7 @@ class Dome9(object):
 
     def list_google_accounts(self):
         """List Google Cloud Accounts
-        
+
         Returns:
             list: List of Google accounts.
 
@@ -129,7 +128,7 @@ class Dome9(object):
 
     def list_kubernetes_accounts(self):
         """List Kubernetes accounts
-        
+
         Returns:
             list: List of Kubernetes accounts.
 
@@ -140,7 +139,7 @@ class Dome9(object):
 
     def list_cloud_accounts(self):
         """List all accounts (AWS, Azure, GCP & Kubernetes)
-        
+
         Returns:
             list: List of Cloud Accounts.
 
@@ -154,7 +153,14 @@ class Dome9(object):
         return accounts
 
     def create_aws_account(self, name, secret, roleArn):
-        account = { "vendor": "aws", "name": "test", "credentials": { "type": "RoleBased", "secret": "", "arn": "" }, "fullProtection": False, "allowReadOnly": True, "lambdaScanner": False }
+        account = {
+            "vendor": "aws",
+            "name": "test",
+            "credentials": {"type": "RoleBased", "secret": "", "arn": ""},
+            "fullProtection": False,
+            "allowReadOnly": True,
+            "lambdaScanner": False
+            }
         account['name'] = name
         account['credentials']['secret'] = secret
         account['credentials']['arn'] = roleArn
@@ -165,7 +171,7 @@ class Dome9(object):
 
     def list_rulesets(self):
         """List Compliance Rulesets
-        
+
         Returns:
             list: List of Compliance rulesets.
 
@@ -180,7 +186,7 @@ class Dome9(object):
         Args:
             id (str): Locate ruleset by id
             name (str): Locate ruleset by name
-        
+
         Returns:
             dict: Compliance ruleset.
 
@@ -197,7 +203,7 @@ class Dome9(object):
 
         Args:
             ruleset (dict): Ruleset object.
-        
+
         Returns:
             dict: Compliance ruleset.
 
@@ -211,7 +217,7 @@ class Dome9(object):
 
         Args:
             ruleset (dict): Ruleset object.
-        
+
         Returns:
             dict: Compliance ruleset.
 
@@ -225,19 +231,18 @@ class Dome9(object):
 
         Args:
             id (str): ID of the ruleset
-        
+
         Returns:
             bool: Deletion status
         """
         return self._delete(route='CompliancePolicy/%s' % str(id))
-
 
     # ------------------ Remediations ------------------
     # --------------------------------------------------
 
     def list_remediations(self):
         """List Remediations
-        
+
         Returns:
             list: List of Remediation object.
 
@@ -251,7 +256,7 @@ class Dome9(object):
 
         Args:
             remediation (dict): Remediation object.
-        
+
         Returns:
             dict: Remediation object.
 
@@ -265,7 +270,7 @@ class Dome9(object):
 
         Args:
             remediation (dict): Remediation object.
-        
+
         Returns:
             dict: Remediation object.
 
@@ -279,19 +284,18 @@ class Dome9(object):
 
         Args:
             id (str): ID of the remediation
-        
+
         Returns:
             bool: Deletion status
         """
         return self._delete(route='ComplianceRemediation/%s' % str(id))
-
 
     # ------------------  Exclusions  ------------------
     # --------------------------------------------------
 
     def list_exclusions(self):
         """List all exclusions
-        
+
         Returns:
             list: List of Exclusion object.
 
@@ -302,22 +306,21 @@ class Dome9(object):
 
     def delete_exclusion(self, id):
         """Delete an exclusion
-        
+
         Args:
             id (str): Id of the exclusion
-        
+
         Returns:
             bool: Deletion status
         """
         return self._delete(route='Exclusion/%s' % str(id))
-
 
     # ------------------ Assessments  ------------------
     # --------------------------------------------------
 
     def run_assessment(self, rulesetId, cloudAccountId, region=None):
         """Run compliance assessments on Cloud Accounts, and get the results
-        
+
         Args:
             rulesetId (int): Id of the Compliance Policy Ruleset to run
             cloudAccountId (str): Id of the Cloud Account
@@ -330,9 +333,9 @@ class Dome9(object):
             .. literalinclude:: schemas/AssessmentResult.json
         """
         bundle = {
-			'id': rulesetId,
-			'CloudAccountId': cloudAccountId
-		}
+            'id': rulesetId,
+            'CloudAccountId': cloudAccountId
+        }
         if region:
             bundle['region'] = region
         results = self._post(route='assessment/bundleV2', payload=bundle)
