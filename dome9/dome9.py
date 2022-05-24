@@ -182,16 +182,14 @@ class Dome9(object):
         pagination = {'pageSize': pagesize}
         rsp = self._post(route='protected-asset/search', payload=pagination)
         results = rsp
-        
+
         while rsp['searchAfter']:
             print(len(results['assets']))
             pagination['searchAfter'] = rsp['searchAfter']
             rsp = self._post(route='protected-asset/search', payload=pagination)
             results['assets'].extend(rsp['assets'])
-        
+
         return results
-
-
 
     # ------------------ Rulesets ------------------
     # ----------------------------------------------

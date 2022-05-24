@@ -1,5 +1,5 @@
-Compliance Rulesets
-===================
+Rulesets
+========
 
 get_ruleset
 ------------------------

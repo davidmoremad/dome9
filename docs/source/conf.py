@@ -161,7 +161,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'Dome9', 'Dome9 Documentation',
-     author, 'Dome9', 'One line description of project.',
+     author, 'David Amrani', 'Dome9 Python SDK.',
      'Miscellaneous'),
 ]
 

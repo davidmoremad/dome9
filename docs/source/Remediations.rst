@@ -1,5 +1,5 @@
-Compliance Remediations
-=======================
+Remediations
+============
 
 
 list_remediations

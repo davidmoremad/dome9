@@ -1,5 +1,5 @@
-Compliance Accounts
-===================
+Accounts
+========
 
 get_cloud_account
 ------------------------
