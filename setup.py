@@ -15,11 +15,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+import io
 from setuptools import setup, find_packages
 
 
 def read_file(filename):
-    with open(filename, encoding="utf-8") as f:
+    with io.open(filename, encoding="utf-8") as f:
         return f.read()
 
 
