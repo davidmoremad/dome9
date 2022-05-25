@@ -434,4 +434,4 @@ class Dome9(object):
         Returns:
             bool
         """
-        return self._delete(route=f'user/{userid}')
+        return self._delete(route='user/%s' % str(userid))
