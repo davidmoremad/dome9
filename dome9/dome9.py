@@ -79,11 +79,11 @@ class Dome9(object):
     # ------------------   Accounts   ------------------
     # --------------------------------------------------
 
-    def get_cloud_account(self, id):
+    def get_cloud_account(self, cloudId):
         """Get a Cloud Account
 
         Args:
-            id (str): ID of the Cloud Account
+            cloudId (str): ID of the Cloud Account
 
         Returns:
             dict: Cloud Account object.
@@ -91,7 +91,7 @@ class Dome9(object):
         Response object:
             .. literalinclude:: schemas/AwsCloudAccount.json
         """
-        return self._get(route='CloudAccounts/%s' % str(id))
+        return self._get(route='CloudAccounts/%s' % str(cloudId))
 
     def list_aws_accounts(self):
         """List AWS accounts
@@ -153,6 +153,16 @@ class Dome9(object):
         return accounts
 
     def create_aws_account(self, name, secret, roleArn):
+        """Connect AWS account to Dome9
+
+        Args:
+            name (str): Name of the new account
+            secret (str): Secret of the AWS role
+            roleArn (str): Role ARN. Identifier of the AWS role
+
+        Returns:
+            bool
+        """
         account = {
             "vendor": "aws",
             "name": "test",
@@ -169,14 +179,14 @@ class Dome9(object):
     # ------------------- Assets -------------------
     # ----------------------------------------------
 
-    def list_protected_assets(self, textSearch="", filters=[], pagesize=1000):
+    def list_protected_assets(self, textSearch="", filters=[], pageSize=1000):
         """List all Cloud Assets
 
         Args:
             textSearch (list): Filter query by using text string. (i.e.: prod-uk)
             filters (list): List of filters. `[{name: "platform", value: "aws"},{name: "cloudAccountId", value: "0123456789"}]`
             List of filter names: organizationalUnitId, platform, type, cloudAccountId, region, network, resourceGroup.
-            pagesize (int): Items per query
+            pageSize (int): Items per query
 
         Returns:
             dict: Pagination of protected assets.
@@ -185,7 +195,7 @@ class Dome9(object):
             .. literalinclude:: schemas/ProtectedAsset.json
         """
         results = {}
-        pagination = {"pageSize": pagesize, "filter": {"fields": filters, 'freeTextPhrase': textSearch}}
+        pagination = {"pageSize": pageSize, "filter": {"fields": filters, 'freeTextPhrase': textSearch}}
         rsp = self._post(route='protected-asset/search', payload=pagination)
         results = rsp
 
@@ -216,7 +226,7 @@ class Dome9(object):
         """Get a specific Compliance ruleset
 
         Args:
-            id (str): Locate ruleset by id
+            rulesetId (str): Locate ruleset by id
             name (str): Locate ruleset by name
 
         Returns:
@@ -262,7 +272,7 @@ class Dome9(object):
         """Delete a Compliance ruleset
 
         Args:
-            id (int): ID of the ruleset
+            rulesetId (int): ID of the ruleset
 
         Returns:
             bool: Deletion status
@@ -315,7 +325,7 @@ class Dome9(object):
         """Delete a Remediation
 
         Args:
-            id (str): ID of the remediation
+            remediationId (str): ID of the remediation
 
         Returns:
             bool: Deletion status
@@ -340,7 +350,7 @@ class Dome9(object):
         """Delete an exclusion
 
         Args:
-            id (str): Id of the exclusion
+            exclusionId (str): Id of the exclusion
 
         Returns:
             bool: Deletion status
@@ -387,7 +397,7 @@ class Dome9(object):
         """
         return self._get(route='AssessmentHistoryV2/%s' % str(assessmentId))
 
-    # -------------------- Users --------------------
+    # -------------------- Users -------------------
     # ----------------------------------------------
 
     def list_users(self):
@@ -405,7 +415,7 @@ class Dome9(object):
         """Get user registered in Dome9
 
         Args:
-            userid (id): Id of the user
+            userId (id): Id of the user
 
         Returns:
             dict: User object. Ref: /docs/source/schemas/User.json
@@ -446,7 +456,7 @@ class Dome9(object):
         """Delete a user in Dome9
 
         Args:
-            userid (int): Id of the user
+            userId (int): Id of the user
 
         Returns:
             bool
