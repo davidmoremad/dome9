@@ -212,7 +212,7 @@ class Dome9(object):
         """
         return self._get(route='CompliancePolicy')
 
-    def get_ruleset(self, id=None, name=None):
+    def get_ruleset(self, rulesetId=None, name=None):
         """Get a specific Compliance ruleset
 
         Args:
@@ -226,7 +226,7 @@ class Dome9(object):
             .. literalinclude:: schemas/ComplianceRuleset.json
         """
         if id:
-            return self._get(route='CompliancePolicy/%s' % str(id))
+            return self._get(route='CompliancePolicy/%s' % str(rulesetId))
         elif name:
             return filter(lambda x: x['name'] == name, self.list_rulesets())[0]
 
@@ -258,16 +258,16 @@ class Dome9(object):
         """
         return self._put(route='CompliancePolicy', payload=ruleset)
 
-    def delete_ruleset(self, id):
+    def delete_ruleset(self, rulesetId):
         """Delete a Compliance ruleset
 
         Args:
-            id (str): ID of the ruleset
+            id (int): ID of the ruleset
 
         Returns:
             bool: Deletion status
         """
-        return self._delete(route='CompliancePolicy/%s' % str(id))
+        return self._delete(route='CompliancePolicy/%s' % str(rulesetId))
 
     # ------------------ Remediations ------------------
     # --------------------------------------------------
@@ -311,7 +311,7 @@ class Dome9(object):
         """
         return self._put(route='ComplianceRemediation', payload=remediation)
 
-    def delete_remediation(self, id):
+    def delete_remediation(self, remediationId):
         """Delete a Remediation
 
         Args:
@@ -320,7 +320,7 @@ class Dome9(object):
         Returns:
             bool: Deletion status
         """
-        return self._delete(route='ComplianceRemediation/%s' % str(id))
+        return self._delete(route='ComplianceRemediation/%s' % str(remediationId))
 
     # ------------------  Exclusions  ------------------
     # --------------------------------------------------
@@ -336,7 +336,7 @@ class Dome9(object):
         """
         return self._get(route='Exclusion')
 
-    def delete_exclusion(self, id):
+    def delete_exclusion(self, exclusionId):
         """Delete an exclusion
 
         Args:
@@ -345,7 +345,7 @@ class Dome9(object):
         Returns:
             bool: Deletion status
         """
-        return self._delete(route='Exclusion/%s' % str(id))
+        return self._delete(route='Exclusion/%s' % str(exclusionId))
 
     # ------------------ Assessments  ------------------
     # --------------------------------------------------
@@ -373,7 +373,21 @@ class Dome9(object):
         results = self._post(route='assessment/bundleV2', payload=bundle)
         return results
 
-    # -------------------- User --------------------
+    def get_assessment(self, assessmentId):
+        """Get results of an assesment by id
+
+        Args:
+            assessmentId (int): Report/Assessment id
+
+        Returns:
+            dict: Assesment result. Ref: /docs/source/schemas/AssessmentResults.json
+
+        Response object:
+            .. literalinclude:: schemas/AssessmentResult.json
+        """
+        return self._get(route='AssessmentHistoryV2/%s' % str(assessmentId))
+
+    # -------------------- Users --------------------
     # ----------------------------------------------
 
     def list_users(self):
@@ -387,7 +401,7 @@ class Dome9(object):
         """
         return self._get(route='user')
 
-    def get_user(self, userid):
+    def get_user(self, userId):
         """Get user registered in Dome9
 
         Args:
@@ -399,7 +413,7 @@ class Dome9(object):
         Response object:
             .. literalinclude:: schemas/User.json
         """
-        return self._get(route='user/%s' % str(userid))
+        return self._get(route='user/%s' % str(userId))
 
     def create_user(self, email, name, surname=""):
         """Create user in Dome9
@@ -421,11 +435,14 @@ class Dome9(object):
             "firstName": name,
             "lastName": surname,
             "roleIds": [], "ssoEnabled": False,
-            "permissions": {"access": [], "manage": [], "view": [], "create": [], "crossAccountAccess": [], "rulesets": [], "notifications": [], "policies": [], "alertActions": [], "onBoarding": []}
+            "permissions": {
+                "access": [], "manage": [], "view": [], "create": [], "crossAccountAccess": [],
+                "rulesets": [], "notifications": [], "policies": [], "alertActions": [], "onBoarding": []
+                }
             }
         return self._post(route='user', payload=payload)
 
-    def delete_user(self, userid):
+    def delete_user(self, userId):
         """Delete a user in Dome9
 
         Args:
@@ -434,4 +451,4 @@ class Dome9(object):
         Returns:
             bool
         """
-        return self._delete(route='user/%s' % str(userid))
+        return self._delete(route='user/%s' % str(userId))
