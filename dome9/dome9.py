@@ -359,7 +359,7 @@ class Dome9(object):
             region (str, optional): Set a specific region. Defaults to None.
 
         Returns:
-            dict: AssessmentResult. Ref ./outputs/AssessmentResults.json
+            dict: Assessment result. Ref: /docs/source/schemas/AssessmentResults.json
 
         Response object:
             .. literalinclude:: schemas/AssessmentResult.json
@@ -372,3 +372,66 @@ class Dome9(object):
             bundle['region'] = region
         results = self._post(route='assessment/bundleV2', payload=bundle)
         return results
+
+    # -------------------- User --------------------
+    # ----------------------------------------------
+
+    def list_users(self):
+        """List all Dome9 users for the Dome9 account
+
+        Returns:
+            dict: User object. Ref: /docs/source/schemas/User.json
+
+        Response object:
+            .. literalinclude:: schemas/User.json
+        """
+        return self._get(route='user')
+
+    def get_user(self, userid):
+        """Get user registered in Dome9
+
+        Args:
+            userid (id): Id of the user
+
+        Returns:
+            dict: User object. Ref: /docs/source/schemas/User.json
+
+        Response object:
+            .. literalinclude:: schemas/User.json
+        """
+        return self._get(route='user/%s' % str(userid))
+
+    def create_user(self, email, name, surname=""):
+        """Create user in Dome9
+
+        Args:
+            email (str): User email of the new user
+            name (str): Name of the new user
+            surname (str, optional): Surname of the new user. Defaults to ""
+
+        Returns:
+            dict: User object. Ref: /docs/source/schemas/User.json
+
+        Response object:
+            .. literalinclude:: schemas/User.json
+        """
+        payload = {
+            "id": None,
+            "email": email,
+            "firstName": name,
+            "lastName": surname,
+            "roleIds": [], "ssoEnabled": False,
+            "permissions": {"access": [], "manage": [], "view": [], "create": [], "crossAccountAccess": [], "rulesets": [], "notifications": [], "policies": [], "alertActions": [], "onBoarding": []}
+            }
+        return self._post(route='user', payload=payload)
+
+    def delete_user(self, userid):
+        """Delete a user in Dome9
+
+        Args:
+            userid (int): Id of the user
+
+        Returns:
+            bool
+        """
+        return self._delete(route=f'user/{userid}')

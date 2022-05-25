@@ -17,6 +17,7 @@ Welcome to Dome9's documentation!
   Remediations.rst
   Exclusions.rst
   Assessments.rst
+  Users.rst
  
 
 .. toctree::

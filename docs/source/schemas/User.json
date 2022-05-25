@@ -1,0 +1,26 @@
+{
+    "id": 0,
+    "name": "string",
+    "email": "MyName@gmail.com",
+    "accountId": 0,
+    "isSuspended": true,
+    "isOwner": true,
+    "isSuperUser": true,
+    "isAuditor": true,
+    "hasApiKey": true,
+    "hasApiKeyV1": true,
+    "hasApiKeyV2": true,
+    "isMfaEnabled": true,
+    "ssoEnabled": true,
+    "roleIds": [
+      0
+    ],
+    "iamSafe": null,
+    "canSwitchRole": true,
+    "isLocked": true,
+    "lastLogin": "2022-05-24T17:41:03Z",
+    "permissions": null,
+    "calculatedPermissions": null,
+    "isMobileDevicePaired": true,
+    "mfaEnforcement": null
+  }
