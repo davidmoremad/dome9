@@ -7,6 +7,9 @@ run_assessment
    :noindex:
    :members:  run_assessment
 
+
+-----
+
 get_assessment
 ------------------------
 .. automodule:: dome9.dome9.Dome9
