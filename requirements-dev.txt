@@ -3,7 +3,7 @@
 twine>=1.11.0
 
 # Documentation
-Sphinx==1.8.5
+Sphinx==4.5.0
 sphinx_rtd_theme
 sphinxcontrib.napoleon
 

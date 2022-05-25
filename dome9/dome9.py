@@ -174,8 +174,8 @@ class Dome9(object):
 
         Args:
             textSearch (list): Filter query by using text string. (i.e.: prod-uk)
-            filters (list): List of filters. (i.e.: `[{name: "platform", value: "google"},{name: "cloudAccountId", value: "0123456789"}]`)
-                List of filter names: organizationalUnitId, platform, type, cloudAccountId, region, network, resourceGroup. 
+            filters (list): List of filters. `[{name: "platform", value: "aws"},{name: "cloudAccountId", value: "0123456789"}]`
+            List of filter names: organizationalUnitId, platform, type, cloudAccountId, region, network, resourceGroup.
             pagesize (int): Items per query
 
         Returns:
