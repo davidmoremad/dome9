@@ -226,7 +226,7 @@ class Dome9(object):
         """Get a specific Compliance ruleset
 
         Args:
-            rulesetId (str): Locate ruleset by id
+            rulesetId (int): Locate ruleset by id
             name (str): Locate ruleset by name
 
         Returns:
@@ -325,7 +325,7 @@ class Dome9(object):
         """Delete a Remediation
 
         Args:
-            remediationId (str): ID of the remediation
+            remediationId (int): ID of the remediation
 
         Returns:
             bool: Deletion status
@@ -346,11 +346,39 @@ class Dome9(object):
         """
         return self._get(route='Exclusion')
 
+    def get_exclusion(self, exclusionId):
+        """Get a specific exclusion
+
+        Args:
+            exclusionId (int): ID of the exclusion
+
+        Returns:
+            dict: Exclusion object.
+
+        Response object:
+            .. literalinclude:: schemas/Exclusion.json
+        """
+        return self._get(route='Exclusion/%s' % str(exclusionId))
+
+    def create_exclusion(self, exclusion):
+        """Create an exclusion
+
+        Args:
+            exclusion (dict): Exclusion object.
+
+        Returns:
+            dict: Exclusion object.
+
+        Response object:
+            .. literalinclude:: schemas/Exclusion.json
+        """
+        return self._post(route='Exclusion', payload=exclusion)
+
     def delete_exclusion(self, exclusionId):
         """Delete an exclusion
 
         Args:
-            exclusionId (str): Id of the exclusion
+            exclusionId (int): Id of the exclusion
 
         Returns:
             bool: Deletion status
@@ -365,7 +393,7 @@ class Dome9(object):
 
         Args:
             rulesetId (int): Id of the Compliance Policy Ruleset to run
-            cloudAccountId (str): Id of the Cloud Account
+            cloudAccountId (int): Id of the Cloud Account
             region (str, optional): Set a specific region. Defaults to None.
 
         Returns:
