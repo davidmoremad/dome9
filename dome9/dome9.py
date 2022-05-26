@@ -226,7 +226,7 @@ class Dome9(object):
         """Get a specific Compliance ruleset
 
         Args:
-            rulesetId (int): Locate ruleset by id
+            rulesetId (str): Locate ruleset by id
             name (str): Locate ruleset by name
 
         Returns:
@@ -272,7 +272,7 @@ class Dome9(object):
         """Delete a Compliance ruleset
 
         Args:
-            rulesetId (int): ID of the ruleset
+            rulesetId (str): ID of the ruleset
 
         Returns:
             bool: Deletion status
@@ -291,7 +291,22 @@ class Dome9(object):
         Response object:
             .. literalinclude:: schemas/Remediation.json
         """
-        return self._get(route='ComplianceRemediation')
+        return self._get(route='Compliance/Remediation')
+
+    def get_remediation(self, remediationId):
+        """Get a specific remediation
+
+        Args:
+            remediationId (str): ID of the remediation
+
+        Returns:
+            dict: Remediation object.
+
+        Response object:
+            .. literalinclude:: schemas/Remediation.json
+        """
+        remediations = self.list_remediations()
+        return next(filter(lambda x: x['id'] == remediationId, remediations)) if remediations else None
 
     def create_remediation(self, remediation):
         """Create a Remediation
@@ -305,7 +320,7 @@ class Dome9(object):
         Response object:
             .. literalinclude:: schemas/Remediation.json
         """
-        return self._post(route='ComplianceRemediation', payload=remediation)
+        return self._post(route='Compliance/Remediation', payload=remediation)
 
     def update_remediation(self, remediation):
         """Update a Remediation
@@ -319,18 +334,18 @@ class Dome9(object):
         Response object:
             .. literalinclude:: schemas/Remediation.json
         """
-        return self._put(route='ComplianceRemediation', payload=remediation)
+        return self._put(route='Compliance/Remediation', payload=remediation)
 
     def delete_remediation(self, remediationId):
         """Delete a Remediation
 
         Args:
-            remediationId (int): ID of the remediation
+            remediationId (str): ID of the remediation
 
         Returns:
             bool: Deletion status
         """
-        return self._delete(route='ComplianceRemediation/%s' % str(remediationId))
+        return self._delete(route='Compliance/Remediation?id=%s' % str(remediationId))
 
     # ------------------  Exclusions  ------------------
     # --------------------------------------------------
@@ -350,7 +365,7 @@ class Dome9(object):
         """Get a specific exclusion
 
         Args:
-            exclusionId (int): ID of the exclusion
+            exclusionId (str): ID of the exclusion
 
         Returns:
             dict: Exclusion object.
@@ -378,7 +393,7 @@ class Dome9(object):
         """Delete an exclusion
 
         Args:
-            exclusionId (int): Id of the exclusion
+            exclusionId (str): Id of the exclusion
 
         Returns:
             bool: Deletion status
@@ -392,8 +407,8 @@ class Dome9(object):
         """Run compliance assessments on Cloud Accounts, and get the results
 
         Args:
-            rulesetId (int): Id of the Compliance Policy Ruleset to run
-            cloudAccountId (int): Id of the Cloud Account
+            rulesetId (str): Id of the Compliance Policy Ruleset to run
+            cloudAccountId (str): Id of the Cloud Account
             region (str, optional): Set a specific region. Defaults to None.
 
         Returns:
@@ -415,7 +430,7 @@ class Dome9(object):
         """Get results of an assesment by id
 
         Args:
-            assessmentId (int): Report/Assessment id
+            assessmentId (str): Report/Assessment id
 
         Returns:
             dict: Assesment result. Ref: /docs/source/schemas/AssessmentResults.json
@@ -484,7 +499,7 @@ class Dome9(object):
         """Delete a user in Dome9
 
         Args:
-            userId (int): Id of the user
+            userId (str): Id of the user
 
         Returns:
             bool
