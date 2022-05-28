@@ -27,11 +27,12 @@ class Dome9(object):
         else:
             raise ValueError('No provided credentials')
 
-    def _request(self, method, route, payload=None):
+    def _request(self, method, route, payload=None):  # noqa: C901 (lint ignore)
         res = url = err = jsonObject = None
         _payload = json.dumps(payload)
+        url = '{}{}'.format(self.endpoint, route)
+
         try:
-            url = '{}{}'.format(self.endpoint, route)
             if method == 'get':
                 res = requests.get(url=url, params=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'post':
@@ -170,7 +171,7 @@ class Dome9(object):
             "fullProtection": False,
             "allowReadOnly": True,
             "lambdaScanner": False
-            }
+        }
         account['name'] = name
         account['credentials']['secret'] = secret
         account['credentials']['arn'] = roleArn
@@ -491,8 +492,8 @@ class Dome9(object):
             "permissions": {
                 "access": [], "manage": [], "view": [], "create": [], "crossAccountAccess": [],
                 "rulesets": [], "notifications": [], "policies": [], "alertActions": [], "onBoarding": []
-                }
             }
+        }
         return self._post(route='user', payload=payload)
 
     def delete_user(self, userId):
