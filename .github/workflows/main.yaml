@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
@@ -42,17 +42,14 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python: [ '2.7', '3.6' , '3.7' , '3.8' , '3.9', '3.10']
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Setting Python ${{ matrix.python }}
+      - name: Setting Python 3
         uses: actions/setup-python@v3
         with:
-          python-version: ${{ matrix.python }}
+          python-version: '3.*'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
