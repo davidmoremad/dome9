@@ -54,7 +54,7 @@ class Dome9(object):
                 if res.content:
                     jsonObject = res.json()
             except Exception as ex:
-                err = {'code': res.status_code, 'message': ex.message, 'content': res.content}
+                err = {'code': res.status_code, 'message': getattr(ex, 'message', ''), 'content': res.content}
         else:
             err = {'code': res.status_code, 'message': res.reason, 'content': res.content}
 

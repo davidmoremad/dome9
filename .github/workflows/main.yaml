@@ -57,4 +57,4 @@ jobs:
       - name: Install package
         run: python setup.py install
       - name: Running tests
-        run: python -c "from dome9 import Dome9;d9 = Dome9('username','password')" # Pending tests
+        run: python -m pytest tests/ -v
