@@ -1,15 +1,21 @@
 # Dome9 (Python SDK)
 
 [![Documentation Status](https://readthedocs.org/projects/dome9/badge/?version=latest&style=flat-square)](http://dome9.readthedocs.io/?badge=latest)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/davidmoremad/dome9/Build?style=flat-square)
+[![🧪 Build, Lint & Test](https://github.com/davidmoremad/dome9/actions/workflows/main.yaml/badge.svg)](https://github.com/davidmoremad/dome9/actions/workflows/main.yaml)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dome9?label=python%20version&style=flat-square)
 ![PyPI](https://img.shields.io/pypi/v/dome9?label=pypi%20package&style=flat-square&color=blueviolet)
 ![GitHub License](https://img.shields.io/github/license/davidmoremad/dome9?style=flat-square&color=blue)
 
 
-Dome9 is a web service that allows you to improve the security of your cloud technologies (AWS, Azure, GCP, Kubernetes, etc...). Through its service you can centralize all the information and perform security controls (GDPR, HIPAA, ISO27001...) individually or globally.
+Dome9, also known as Checkpoint CloudGuard, is a cloud native security solutions for securing
+assets and workloads. At the core of this solution, CloudGuard Posture Management visualizes and
+assesses security posture, detects misconfigurations, automates and actively enforces standard
+policies (GDPR, HIPAA, ISO27001...), and protects against attacks and insider threats. 
 
-This repository contains a Python SDK of this tool. Initially its SDK did not have much functionality and that is why I developed this one to be able to work and include it within my continuous integration processes.
+This repository contains a Python SDK of this tool. Initially its SDK did not have much functionality
+and that is why I developed this one to be able to work and include it within my Continuous Integration processes.
+
+If you want to integrate Dome9 as part of your CI, check my other modules: [Dome9 CLI and Agile](https://github.com/Telefonica/dome9-cli).
 
 ## Installation
 
