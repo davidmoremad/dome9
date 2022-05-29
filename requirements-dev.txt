@@ -9,3 +9,7 @@ sphinxcontrib.napoleon
 
 # Lint
 flake8
+
+# Test
+pytest
+pytest-mock

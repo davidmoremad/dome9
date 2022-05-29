@@ -28,7 +28,7 @@ setup(
     name='dome9',
     version=read_file('VERSION').strip(),
     install_requires=read_file('requirements.txt').splitlines(),
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests*', 'docs*']),
     author='David Amrani Hernandez',
     author_email='davidmorenomad@gmail.com',
     url='https://github.com/davidmoremad',
