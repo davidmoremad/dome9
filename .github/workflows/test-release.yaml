@@ -1,0 +1,20 @@
+name: Release to Pypi
+
+on: [push]
+
+jobs:
+  release:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get VERSION
+        run: |
+          VER=$(cat VERSION)
+          echo "VERSION=$VER" >> $GITHUB_ENV
+      - name: Draft new release
+        uses: release-drafter/release-drafter@v5
+        with:
+          version: ${{ env.VERSION }}
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
