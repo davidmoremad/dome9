@@ -18,7 +18,7 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/{{ $env.VERSION }}',
+              ref: 'refs/tags/${{ env.VERSION }}',
               sha: context.sha
             })
       - uses: release-drafter/release-drafter@v5
