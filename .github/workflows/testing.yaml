@@ -21,8 +21,9 @@ jobs:
               ref: 'refs/tags/${{ env.VERSION }}',
               sha: context.sha
             })
-      - uses: release-drafter/release-drafter@v5
+      - uses: ncipollo/release-action@v1
         with:
-          commitish: v${{ env.VERSION }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # artifacts: "release.tar.gz,foo/*.txt"
+          body: "testing"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.VERSION }}
