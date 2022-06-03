@@ -4,7 +4,6 @@ on: [push, pull_request]
 
 jobs:
   release:
-    needs: [deploy]
     runs-on: ubuntu-latest
     steps:
       - name: Get VERSION
