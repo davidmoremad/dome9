@@ -108,8 +108,9 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
+
   release:
-    needs: [deploy]
+    needs: [publish]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -117,9 +118,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: ./dist/
-      - run: |
-          VER=$(cat VERSION)
-          echo "VERSION=$VER" >> $GITHUB_ENV
+      - run: echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
       - name: Create tag
         uses: actions/github-script@v6
         with:
@@ -127,14 +126,12 @@ jobs:
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/${{ env.VERSION }}',
+              ref: 'refs/tags/v${{ env.VERSION }}',
               sha: context.sha
             })
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "./dist/*"
-          bodyFile: "testing"
+          body: "https://pypi.org/project/dome9/{{ env.VERSION }}/"
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.VERSION }}
-
-    
+          tag: v${{ env.VERSION }}
