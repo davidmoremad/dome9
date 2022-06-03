@@ -133,6 +133,6 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "./dist/*"
-          body: "https://pypi.org/project/dome9/{{ env.VERSION }}/"
+          body: "https://pypi.org/project/dome9/${{ env.VERSION }}/"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.VERSION }}
