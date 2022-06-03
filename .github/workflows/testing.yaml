@@ -16,5 +16,6 @@ jobs:
         with:
           version: ${{ env.VERSION }}
           publish: true
+          commitish: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
