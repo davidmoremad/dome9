@@ -167,7 +167,7 @@ class Dome9(object):
         accounts.extend(self.list_kubernetes_accounts())
         return accounts
 
-    def create_aws_account(self, name, secret, roleArn):
+    def connect_aws_account(self, name, secret, roleArn):
         """Connect AWS account to Dome9
 
         Args:
@@ -179,17 +179,29 @@ class Dome9(object):
             bool
         """
         account = {
+            "name": name,
             "vendor": "aws",
-            "name": "test",
-            "credentials": {"type": "RoleBased", "secret": "", "arn": ""},
+            "credentials": {"type": "RoleBased", "secret": secret, "arn": roleArn},
             "fullProtection": False,
             "allowReadOnly": True,
             "lambdaScanner": False
         }
-        account['name'] = name
-        account['credentials']['secret'] = secret
-        account['credentials']['arn'] = roleArn
         return self._post(route='CloudAccounts', payload=account)
+
+    def connect_azure_account(self, name, tenantId, subscriptionId, applicationId, secretKey):
+        account = {
+            "name": name,
+            "subscriptionId": subscriptionId,
+            "tenantId": tenantId,
+            "credentials": {
+                "clientId": applicationId,
+                "clientPassword": secretKey
+            },
+            "operationMode": "Read",
+            "error": "string",
+            "creationDate": "2018-10-16T12:29:10Z"
+        }
+        return self._post(route='AzureCloudAccount', payload=account)
 
     # ------------------- Assets -------------------
     # ----------------------------------------------
