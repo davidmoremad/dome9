@@ -39,8 +39,20 @@ def test_list_kubernetes_accounts(mocker, dome9):
     assert next(filter(lambda z: z['vendor'] == 'kubernetes', x))
 
 
-def test_create_aws_account(mocker, dome9):
+def test_connect_aws_account(mocker, dome9):
     mymock(mocker, 'requests.post', 'CloudAccount.json', 200)
-    x = dome9.create_aws_account('accountName', 'MYS3CR3T', 'arn:123456789:role/myrole')
+    x = dome9.connect_aws_account('accountName', 'MYS3CR3T', 'arn:123456789:role/myrole')
+    assert x['id'] == '00000000-0000-0000-0000-000000000000'
+    
+
+def test_connect_azure_account(mocker, dome9):
+    mymock(mocker, 'requests.post', 'CloudAccount.json', 200)
+    x = dome9.connect_azure_account(
+        name='Testname',
+        tenantId='b1b2b3b4-abcd-1234-1234-7bc77bc7',
+        subscriptionId='b1b2b3b4-abcd-1234-1234-7bc77bc7',
+        applicationId='b1b2b3b4-abcd-1234-1234-7bc77bc7',
+        secretKey='qwertyuiopoiuytrewq'
+    )
     assert x['id'] == '00000000-0000-0000-0000-000000000000'
 
