@@ -24,7 +24,8 @@ class Dome9(object):
     def __init__(self, key=None, secret=None, endpoint='https://api.dome9.com', apiVersion='v2'):
         self.key = None
         self.secret = None
-        self.headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
+        self.headers = {'Content-Type': 'application/json',
+                        'Accept': 'application/json'}
         self.endpoint = endpoint + '/{}/'.format(apiVersion)
         self._load_credentials(key, secret)
 
@@ -48,15 +49,20 @@ class Dome9(object):
 
         try:
             if method == 'get':
-                res = requests.get(url=url, params=_payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.get(
+                    url=url, params=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'post':
-                res = requests.post(url=url, data=_payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.post(
+                    url=url, data=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'patch':
-                res = requests.patch(url=url, json=_payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.patch(
+                    url=url, json=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'put':
-                res = requests.put(url=url, data=_payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.put(
+                    url=url, data=_payload, headers=self.headers, auth=(self.key, self.secret))
             elif method == 'delete':
-                res = requests.delete(url=url, params=_payload, headers=self.headers, auth=(self.key, self.secret))
+                res = requests.delete(
+                    url=url, params=_payload, headers=self.headers, auth=(self.key, self.secret))
                 return bool(res.status_code == 204)
 
         except requests.ConnectionError as ex:
@@ -68,9 +74,11 @@ class Dome9(object):
                 if res.content:
                     jsonObject = res.json()
             except Exception as ex:
-                err = {'code': res.status_code, 'message': getattr(ex, 'message', ''), 'content': res.content}
+                err = {'code': res.status_code, 'message': getattr(
+                    ex, 'message', ''), 'content': res.content}
         else:
-            err = {'code': res.status_code, 'message': res.reason, 'content': res.content}
+            err = {'code': res.status_code,
+                   'message': res.reason, 'content': res.content}
 
         if err:
             raise Exception(err)
@@ -222,7 +230,8 @@ class Dome9(object):
             .. literalinclude:: schemas/ProtectedAsset.json
         """
         results = {}
-        pagination = {"pageSize": pageSize, "filter": {"fields": filters, 'freeTextPhrase': textSearch}}
+        pagination = {"pageSize": pageSize, "filter": {
+            "fields": filters, 'freeTextPhrase': textSearch}}
         rsp = self._post(route='protected-asset/search', payload=pagination)
         results = rsp
 
@@ -230,7 +239,8 @@ class Dome9(object):
 
         while rsp['searchAfter']:
             pagination['searchAfter'] = rsp['searchAfter']
-            rsp = self._post(route='protected-asset/search', payload=pagination)
+            rsp = self._post(route='protected-asset/search',
+                             payload=pagination)
             results['assets'].extend(rsp['assets'])
 
         return results
@@ -430,12 +440,13 @@ class Dome9(object):
     # ------------------ Assessments  ------------------
     # --------------------------------------------------
 
-    def run_assessment(self, rulesetId, cloudAccountId, region=None):
+    def run_assessment(self, rulesetId, cloudAccountId, cloudAccountType, region=None):
         """Run compliance assessments on Cloud Accounts, and get the results
 
         Args:
             rulesetId (str): Id of the Compliance Policy Ruleset to run
             cloudAccountId (str): Id of the Cloud Account
+            cloudAccountType (str): Type of the Cloud Account (Google, Aws, Azure, Kubernetes, ...)
             region (str, optional): Set a specific region. Defaults to None.
 
         Returns:
@@ -446,7 +457,8 @@ class Dome9(object):
         """
         bundle = {
             'id': rulesetId,
-            'CloudAccountId': cloudAccountId
+            'CloudAccountId': cloudAccountId,
+            'cloudAccountType': cloudAccountType
         }
         if region:
             bundle['region'] = region
