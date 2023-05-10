@@ -272,7 +272,7 @@ class Dome9(object):
         Response object:
             .. literalinclude:: schemas/ComplianceRuleset.json
         """
-        if id:
+        if rulesetId:
             return self._get(route='CompliancePolicy/%s' % str(rulesetId))
         elif name:
             return filter(lambda x: x['name'] == name, self.list_rulesets())[0]
