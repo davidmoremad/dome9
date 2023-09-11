@@ -235,8 +235,6 @@ class Dome9(object):
         rsp = self._post(route='protected-asset/search', payload=pagination)
         results = rsp
 
-        self.list_protected_assets()
-
         while rsp['searchAfter']:
             pagination['searchAfter'] = rsp['searchAfter']
             rsp = self._post(route='protected-asset/search',
