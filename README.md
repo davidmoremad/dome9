@@ -1,5 +1,7 @@
 # Dome9 (Python SDK)
 
+**🚨 This package is not maintained anymore. I recommend you to use the official [Dome9 Python SDK](https://github.com/dome9/dome9-sdk-python)**
+
 ![GitHub License](https://img.shields.io/github/license/davidmoremad/dome9?style=flat-square&color=purple)
 [![Documentation Status](https://readthedocs.org/projects/dome9/badge/?version=latest&style=flat-square)](http://dome9.readthedocs.io/?badge=latest)
 [![Test](https://github.com/davidmoremad/dome9/actions/workflows/test.yaml/badge.svg)](https://github.com/davidmoremad/dome9/actions/workflows/test.yaml)
